@@ -15,6 +15,7 @@ func main() {
 
 	// Routes
 	router.GET("/health-check", routes.HealthCheck)
+	router.GET("/user/:tag", routes.GetUserByTag)
 
 	router.Run(":3000")
 }
