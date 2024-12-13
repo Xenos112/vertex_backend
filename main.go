@@ -13,6 +13,7 @@ func init() {
 
 func main() {
 	router := gin.Default()
+	router.Use(middleware.CorsMiddleware())
 
 	// Routes
 	router.GET("/health-check", routes.HealthCheck)
