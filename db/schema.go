@@ -7,17 +7,17 @@ import (
 )
 
 type User struct {
-	ID         uuid.UUID  `gorm:"primaryKey" json:"id"`
+	ID         uuid.UUID  `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()" json:"id"`
 	UserName   string     `gorm:"not null" json:"user_name"`
 	Password   string     `json:"password"`
 	Email      string     `gorm:"unique;not null" json:"email"`
 	Tag        string     `gorm:"unique;index" json:"tag"`
 	Bio        string     `json:"bio"`
-	Image_ID   *uuid.UUID `gorm:"default:null" json:"image_id"`
-	Banner_ID  *uuid.UUID `gorm:"default:null" json:"banner_id"`
-	GitHub_ID  *uuid.UUID `gorm:"unique" json:"github_id"`
-	Google_ID  *uuid.UUID `gorm:"unique" json:"google_id"`
-	Discord_ID *uuid.UUID `gorm:"unique" json:"discord_id"`
+	Image_ID   *uuid.UUID `gorm:"type:uuid;default:NULL" json:"image_id"`
+	Banner_ID  *uuid.UUID `gorm:"type:uuid;default:NULL" json:"banner_id"`
+	Github_ID  string     `gorm:"unique;NULL" json:"github_id" db:"github_id"`
+	Google_ID  string     `gorm:"unique;NULL" json:"google_id" db:"google_id"`
+	Discord_ID string     `gorm:"unique;NULL" json:"discord_id" db:"discord_id"`
 
 	CreatedAt time.Time `gorm:"autoCreateTime"`
 	UpdatedAt time.Time `gorm:"autoUpdateTime"`
