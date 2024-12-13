@@ -24,5 +24,5 @@ func main() {
 	auth.POST("/login", routes.Login)
 	auth.POST("/register", routes.Register)
 
-	router.Run(":3000")
+	router.Run(":8080")
 }
