@@ -63,8 +63,7 @@ func Login(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
 	}
-
 	ctx.SetCookie("auth_token", token, 3600, "/", "", false, true)
 
-	ctx.JSON(http.StatusOK, gin.H{"data": "Login Successfully", "auth_token": token})
+	ctx.JSON(http.StatusOK, gin.H{"data": user, "auth_token": token})
 }
