@@ -8,6 +8,12 @@ import (
 	"github.com/xenos112/vertex_backend/db"
 )
 
+type UserSuggestion struct {
+	ID           uuid.UUID `json:"id"`
+	UserName     string    `json:"user_name"`
+	ProfileImage string    `json:"profile_image"`
+}
+
 func WhoToFollow(c *gin.Context) {
 	userID := c.MustGet("id").(string)
 	var userTags []db.UserTag
@@ -17,12 +23,6 @@ func WhoToFollow(c *gin.Context) {
 			"error": "Internal Server Error",
 		})
 		return
-	}
-
-	type UserSuggestion struct {
-		ID           uuid.UUID `json:"id"`
-		UserName     string    `json:"user_name"`
-		ProfileImage string    `json:"profile_image"`
 	}
 
 	var sameTagsUsers []UserSuggestion
@@ -42,6 +42,7 @@ func WhoToFollow(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"data": sameTagsUsers,
 	})
