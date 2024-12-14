@@ -107,3 +107,19 @@ type CommunityMember struct {
 	Community_ID uuid.UUID `gorm:"primaryKey;foreignKey:Community_ID;references:ID" json:"community"`
 	Role         string    `gorm:"default:member" json:"role"`
 }
+
+type Tag struct {
+	ID                uuid.UUID `gorm:"primaryKey" json:"id"`
+	Name              string    `json:"name"`
+	Users_Count       int       `json:"users_count"`
+	Communities_Count int       `json:"communities_count"`
+}
+type UserTag struct {
+	User_ID uuid.UUID `gorm:"primaryKey;foreignKey:User_ID;references:ID" json:"user_id"`
+	Tag_ID  uuid.UUID `gorm:"primaryKey;foreignKey:Tag_ID;references:ID" json:"tag_id"`
+}
+
+type CommunityTag struct {
+	Community_ID uuid.UUID `gorm:"primaryKey;foreignKey:Community_ID;references:ID" json:"community_id"`
+	Tag_ID       uuid.UUID `gorm:"primaryKey;foreignKey:Tag_ID;references:ID" json:"tag_id"`
+}

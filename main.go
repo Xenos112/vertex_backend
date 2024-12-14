@@ -23,6 +23,7 @@ func main() {
 	authenticated := router.Group("/authenticated")
 	authenticated.Use(middleware.Auth())
 	authenticated.GET("/me", routes.Me)
+	authenticated.GET("/who-to-follow", routes.WhoToFollow)
 	auth.POST("/login", routes.Login)
 	auth.POST("/register", routes.Register)
 
