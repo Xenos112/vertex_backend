@@ -85,7 +85,7 @@ func Register(ctx *gin.Context) {
 		return
 	}
 
-	ctx.SetCookie("auth_token", token, 3600, "/", "", false, true)
+	ctx.SetCookie("auth_token", token, 2592000, "/", "", false, true)
 	user.Password = ""
 
 	ctx.JSON(http.StatusOK, gin.H{
