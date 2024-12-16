@@ -26,16 +26,18 @@ func WhoToFollow(c *gin.Context) {
 	}
 
 	var sameTagsUsers []UserSuggestion
-	err = db.DB.Raw(`SELECT DISTINCT u.id, u.user_name,
-							COALESCE(m.image, '') AS profile_image
-					FROM users u
-					LEFT JOIN media m ON u.id = m.target_id AND m.type = 'profile_image'
-					JOIN user_tags ut ON u.id = ut.user_id
-					WHERE ut.tag_id IN (SELECT tag_id FROM user_tags WHERE user_id = ?)
-					AND u.id != ?
-					GROUP BY u.id, u.user_name, m.image
-					HAVING COUNT(DISTINCT ut.tag_id) >= 3
-					LIMIT 3`, userID, userID).Scan(&sameTagsUsers).Error
+	err = db.DB.Raw(`
+						SELECT DISTINCT u.id, u.user_name,
+						COALESCE(m.image, '') AS profile_image
+						FROM users u
+						LEFT JOIN media m ON u.id = m.target_id AND m.type = 'profile_image'
+						JOIN user_tags ut ON u.id = ut.user_id
+						WHERE ut.tag_id IN (SELECT tag_id FROM user_tags WHERE user_id = ?)
+						AND u.id != ?
+						GROUP BY u.id, u.user_name, m.image
+						HAVING COUNT(DISTINCT ut.tag_id) >= 3
+						LIMIT 3
+						`, userID, userID).Scan(&sameTagsUsers).Error
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Internal Server Error",
