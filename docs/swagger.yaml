@@ -1,0 +1,77 @@
+basePath: /
+definitions:
+  db.User:
+    properties:
+      banner_id:
+        type: string
+      bio:
+        type: string
+      createdAt:
+        type: string
+      discord_id:
+        type: string
+      email:
+        type: string
+      github_id:
+        type: string
+      google_id:
+        type: string
+      id:
+        type: string
+      image_id:
+        type: string
+      password:
+        type: string
+      tag:
+        type: string
+      updatedAt:
+        type: string
+      user_name:
+        type: string
+    type: object
+  routes.errorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server for Gin using Swagger documentation.
+  title: Gin Swagger Example API
+  version: "1.0"
+paths:
+  /user/{tag}:
+    get:
+      consumes:
+      - application/json
+      description: Get a user by their unique tag.
+      parameters:
+      - description: Tag of the user
+        in: path
+        name: tag
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/db.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routes.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.errorResponse'
+      summary: Get the User By Tag
+      tags:
+      - User
+swagger: "2.0"

@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 
+	_ "github.com/xenos112/vertex_backend/docs"
+
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"
@@ -11,6 +13,8 @@ import (
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/discord"
 	"github.com/markbates/goth/providers/github"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/xenos112/vertex_backend/db"
 	"github.com/xenos112/vertex_backend/middleware"
 	"github.com/xenos112/vertex_backend/routes"
@@ -45,12 +49,20 @@ func init() {
 	gothic.Store = store
 }
 
+// @title Gin Swagger Example API
+// @version 1.0
+// @description This is a sample server for Gin using Swagger documentation.
+// @host localhost:8080
+// @BasePath /
 func main() {
 	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.Default()
 	router.Use(middleware.CorsMiddleware())
 	router.Use(middleware.Oauth)
+
+	// Swagger
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Routes
 	router.GET("/health-check", routes.HealthCheck)

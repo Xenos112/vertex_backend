@@ -8,6 +8,21 @@ import (
 	"gorm.io/gorm"
 )
 
+type errorResponse struct {
+	Error string `json:"error"`
+}
+
+// @Summary Get the User By Tag
+// @Description Get a user by their unique tag.
+// @Tags User
+// @Accept  json
+// @Produce  json
+// @Param tag path string true "Tag of the user"
+// @Success 200 {object} db.User
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /user/{tag} [get]
 func GetUserByTag(c *gin.Context) {
 	var user db.User
 
