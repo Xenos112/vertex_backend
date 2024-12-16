@@ -1,0 +1,20 @@
+# .air.toml
+
+# The command to run your app (you can replace it with your app's main package)
+# It is usually `go run main.go` or `go run ./cmd` or `go run ./`
+cmd = "go run main.go"
+
+# This will define which files should be watched for changes.
+# You can add more directories or file types as needed.
+root = "."
+watch_dir = ["."]
+exclude_dir = ["assets", "node_modules", "vendor"]
+
+# This is for reloading on changes to Go files
+[build]
+  cmd = "go run main.go"
+  bin = "tmp/main"  # Optional: binary name for building
+
+# If you want to log any error or other output
+[log]
+  time = true
