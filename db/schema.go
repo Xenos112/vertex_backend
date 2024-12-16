@@ -10,7 +10,7 @@ type User struct {
 	ID         uuid.UUID  `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()" json:"id"`
 	UserName   string     `gorm:"not null" json:"user_name"`
 	Password   string     `json:"password"`
-	Email      string     `gorm:"unique;not null" json:"email"`
+	Email      string     `gorm:"unique;NULL" json:"email"`
 	Tag        string     `gorm:"unique;index" json:"tag"`
 	Bio        string     `json:"bio"`
 	Image_ID   *uuid.UUID `gorm:"type:uuid;default:NULL" json:"image_id"`

@@ -47,11 +47,6 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	if user.Google_ID != "" || user.Discord_ID != "" || user.Github_ID != "" {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "This Account is Connected with Social Media"})
-		return
-	}
-
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(data.Password))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Password"})
