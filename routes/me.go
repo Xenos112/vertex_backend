@@ -9,6 +9,10 @@ import (
 	"gorm.io/gorm"
 )
 
+type errorResponse struct {
+	Error string `json:"error"`
+}
+
 type UserWithProfileImage struct {
 	UserID       uuid.UUID `json:"user_id"`
 	UserName     string    `json:"user_name"`

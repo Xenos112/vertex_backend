@@ -16,6 +16,21 @@ type LoginJsonData struct {
 	Password string `json:"password"`
 }
 
+type errorResponse struct {
+	Error string `json:"error"`
+}
+
+// @Summary Login
+// @Description Login to the service
+// @Tags login
+// @Accept  json
+// @Produce  json
+// @Param login body LoginJsonData true "Login Data"
+// @Success 200 {object} LoginResponse
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Router /login [post]
+
 func Login(ctx *gin.Context) {
 	var data LoginJsonData
 	var user db.User
