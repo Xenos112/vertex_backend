@@ -15,7 +15,7 @@ func CorsMiddleware() gin.HandlerFunc {
 		ctx.Header("Access-Control-Max-Age", "86400")
 
 		if ctx.Request.Method == http.MethodOptions {
-			ctx.AbortWithStatus(http.StatusOK)
+			ctx.AbortWithStatus(http.StatusNoContent)
 			return
 		}
 
